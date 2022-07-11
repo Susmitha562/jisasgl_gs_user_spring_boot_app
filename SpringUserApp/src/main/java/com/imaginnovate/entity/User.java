@@ -1,20 +1,32 @@
 package com.imaginnovate.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 
 @Entity
 @Table(name="JBHUSER")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class User {
 
 
@@ -33,6 +45,11 @@ public class User {
 		@Pattern(regexp="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$+",message="invalid email")
 		@Column(name ="email")
 		private String email;
+		
+		@OneToMany(targetEntity = Address.class, cascade = CascadeType.ALL)
+		@JoinColumn(name="user_id", referencedColumnName = "id")
+		private List<Address> address;
+
 
 		public long getId() {
 			return id;
@@ -64,5 +81,13 @@ public class User {
 
 		public void setEmail(String email) {
 			this.email = email;
+		}
+
+		public List<Address> getAddress() {
+			return address;
+		}
+
+		public void setAddress(List<Address> address) {
+			this.address = address;
 		}
 }

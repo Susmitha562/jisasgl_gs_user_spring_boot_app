@@ -2,26 +2,37 @@ package com.imaginnovate.service.impl;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.imaginnovate.entity.User;
 import com.imaginnovate.exception.ResourceNofoundException;
+import com.imaginnovate.repository.AddressRepository;
 import com.imaginnovate.repository.UserRepository;
-import com.imaginnovate.services.UserService;
+import com.imaginnovate.services.DtoService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class DtoServiceImpl implements DtoService{
 
+	@Autowired
 	private UserRepository userRepository;
 	
-    //post
-	public UserServiceImpl(UserRepository userRepository) {
+	@Autowired
+	AddressRepository addressRepository;
+
+	ModelMapper modelmapper = new ModelMapper();
+	
+    //for save method
+	public DtoServiceImpl(UserRepository userRepository) {
 		super();
 		this.userRepository = userRepository;
 	}
 	
+	
 	@Override
-	public User saveUser(User user) {
+	public User saveUser(DtoService dtoservice) {
+		User user = modelmapper.map(dtoservice, User.class);
 		return userRepository.save(user);
 	}
 	
@@ -44,6 +55,7 @@ public class UserServiceImpl implements UserService{
 		exitingUser.setEmail(user.getEmail());
 		return exitingUser;
 	}
+	
 
 	@Override
 	public void deleteUser(long id) {

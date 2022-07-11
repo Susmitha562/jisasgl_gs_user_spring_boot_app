@@ -16,31 +16,33 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.imaginnovate.dto.UserDto;
 import com.imaginnovate.entity.User;
 import com.imaginnovate.repository.UserRepository;
-import com.imaginnovate.services.UserService;
+import com.imaginnovate.services.DtoService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+	private DtoService dtoService;
 	
 	@Autowired
 	private UserRepository userRepository;
 	
-	public UserController(UserService userService) {
-		super();
-		this.userService = userService;
-	}
+	
+//	@PostMapping("/save/users")
+//	public UsersDetails saveusers(@RequestBody UserDataDto usersdto)
+//	{
+//		return dtoservice.saveusers(dtoservice);
+//	}
 	
 	@PostMapping()
-	public ResponseEntity<User> saveEmplyoee(@RequestBody @Valid User user){
+	public ResponseEntity<User> saveEmplyoee(@RequestBody @Valid UserDto userdto){
 		System.out.println("UserController.saveUser()");
-		return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.CREATED);
+		return new ResponseEntity<User>(dtoService.saveUser(userdto), HttpStatus.CREATED);
 	}
-	
 	
 	
 	@GetMapping()

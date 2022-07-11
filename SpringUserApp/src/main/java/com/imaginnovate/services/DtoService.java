@@ -5,19 +5,18 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.imaginnovate.entity.User;
 import com.imaginnovate.repository.UserRepository;
 
 
-public interface UserService {
+public interface DtoService {
 	
-
-	    User saveUser(User user); 
+	    User saveUser(DtoService dtoservice); 
 		List<User> getAllUsers();
 		User getUserById(long id);
 		User updateUser(User user,long id);
 		void deleteUser(long id);
+		
 		
 	}
 
