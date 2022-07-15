@@ -9,6 +9,5 @@ import com.imaginnovate.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<UserDto, Long>{
 	
-	
 
 }
