@@ -6,50 +6,49 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.imaginnovate.dto.UserDto;
 import com.imaginnovate.entity.User;
-import com.imaginnovate.exception.ResourceNofoundException;
 import com.imaginnovate.repository.AddressRepository;
-import com.imaginnovate.repository.UserRepository;
 import com.imaginnovate.services.DtoService;
 
 @Service
 public class DtoServiceImpl implements DtoService{
 
 	@Autowired
-	private UserRepository userRepository;
+	AddressRepository addressRepository;
 	
 	@Autowired
-	AddressRepository addressRepository;
+	DtoService dtoService;
 
 	ModelMapper modelmapper = new ModelMapper();
 	
     //for save method
-	public DtoServiceImpl(UserRepository userRepository) {
+	public DtoServiceImpl(DtoService dtoService) {
 		super();
-		this.userRepository = userRepository;
+		this.dtoService = dtoService;
 	}
 	
 	
 	@Override
-	public User saveUser(DtoService dtoservice) {
-		User user = modelmapper.map(dtoservice, User.class);
-		return userRepository.save(user);
+	public User saveUser(UserDto userDto) {
+		User user = modelmapper.map(userDto, User.class);
+		return dtoService.saveUser(userDto);
 	}
 	
 	@Override
 	public List<User> getAllUsers() {
-		return userRepository.findAll();
+		return dtoService.getAllUsers();
 	}
 
 
 	@Override
 	public User getUserById(long id) {
-		return userRepository.findById(id).orElse(null);
+		return dtoService.getUserById(id);
 	}
 
 	@Override
 	public User updateUser(User user, long id) {
-		User exitingUser = userRepository.findById(id).orElseThrow(()->new  ResourceNofoundException ("User","ID",id));
+		User exitingUser = dtoService.getUserById(id);
 		exitingUser.setName(user.getName());
 		exitingUser.setUsername(user.getUsername());
 		exitingUser.setEmail(user.getEmail());
@@ -59,10 +58,11 @@ public class DtoServiceImpl implements DtoService{
 
 	@Override
 	public void deleteUser(long id) {
-		userRepository.findById(id).orElseThrow(() -> new  ResourceNofoundException ("User","ID",id));
-		userRepository.deleteById(id);
+		dtoService.getUserById(id);
+		dtoService.deleteUser(id);
 		
 	}
+
 
 
 	

@@ -3,20 +3,14 @@ package com.imaginnovate.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.imaginnovate.repository.AddressRepository;
 import com.imaginnovate.repository.UserRepository;
 
-@SpringBootApplication
-//@ComponentScan("com.imaginnovate.repositories")
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class SpringUserAppApplication {
-
-	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
-	AddressRepository addressRepository;
 	
 	public static void main(String[] args) {
 		

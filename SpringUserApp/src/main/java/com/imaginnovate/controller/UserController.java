@@ -28,15 +28,13 @@ public class UserController {
 	@Autowired
 	private DtoService dtoService;
 	
-	@Autowired
-	private UserRepository userRepository;
 	
 	
-//	@PostMapping("/save/users")
-//	public UsersDetails saveusers(@RequestBody UserDataDto usersdto)
-//	{
-//		return dtoservice.saveusers(dtoservice);
-//	}
+		@PostMapping("/save/users")
+	public User saveusers(@RequestBody UserDto userdto)
+	{
+		return dtoService.saveUser(userdto);
+	}
 	
 	@PostMapping()
 	public ResponseEntity<User> saveEmplyoee(@RequestBody @Valid UserDto userdto){
@@ -47,7 +45,7 @@ public class UserController {
 	
 	@GetMapping()
 	public List<User> getAllUsers(){
-		return userService.getAllUsers() ;
+		return dtoService.getAllUsers() ;
 		
 	}
 	
@@ -55,7 +53,7 @@ public class UserController {
 	
 	@GetMapping("{id}")
 	public ResponseEntity<User> getEmployyeByID(@PathVariable ("id")long id){
-		return new ResponseEntity<User>(userService.getUserById(id),HttpStatus.OK);
+		return new ResponseEntity<User>(dtoService.getUserById(id),HttpStatus.OK);
 		
 	}
 	
@@ -63,7 +61,7 @@ public class UserController {
 	
 	@PutMapping("{id}")
 	public ResponseEntity<User> updtateEmployee(@PathVariable("id") long id, @RequestBody User user){
-		return new ResponseEntity<User>(userService.updateUser(user, id), HttpStatus.OK);
+		return new ResponseEntity<User>(dtoService.updateUser(user, id), HttpStatus.OK);
 		
 	}
 	
@@ -71,7 +69,7 @@ public class UserController {
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<String>deleteEmployee(@PathVariable("id")long id){
-		userService.deleteUser(id);
+		dtoService.deleteUser(id);
 		return new ResponseEntity<String>("user deleted successfully",HttpStatus.OK) ;
 		
 	}
