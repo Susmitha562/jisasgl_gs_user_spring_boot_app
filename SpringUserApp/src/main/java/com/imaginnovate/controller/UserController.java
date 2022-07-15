@@ -27,10 +27,8 @@ public class UserController {
 	
 	@Autowired
 	private DtoService dtoService;
-	
-	
-	
-		@PostMapping("/save/users")
+
+	@PostMapping("/save/users")
 	public User saveusers(@RequestBody UserDto userdto)
 	{
 		return dtoService.saveUser(userdto);
@@ -49,7 +47,6 @@ public class UserController {
 		
 	}
 	
-	// get all users REST API by id
 	
 	@GetMapping("{id}")
 	public ResponseEntity<User> getEmployyeByID(@PathVariable ("id")long id){
@@ -57,7 +54,6 @@ public class UserController {
 		
 	}
 	
-	//build update REST API
 	
 	@PutMapping("{id}")
 	public ResponseEntity<User> updtateEmployee(@PathVariable("id") long id, @RequestBody User user){
@@ -65,7 +61,6 @@ public class UserController {
 		
 	}
 	
-	//build delete user REST API
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<String>deleteEmployee(@PathVariable("id")long id){
