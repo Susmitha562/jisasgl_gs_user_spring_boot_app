@@ -35,10 +35,10 @@ public class DtoServiceImpl implements DtoService{
 		return dtoService.saveUser(userDto);
 	}
 	
-	@Override
-	public List<User> getAllUsers() {
-		return dtoService.getAllUsers();
-	}
+//	@Override
+//	public List<User> getAllUsers() {
+//		return dtoService.getAllUsers();
+//	}
 
 
 	@Override
@@ -63,6 +63,18 @@ public class DtoServiceImpl implements DtoService{
 		
 	}
 
+
+	@Override
+	public List<User> getAllUsers(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	
+
+
+	
 
 
 	

@@ -18,7 +18,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
 public class Address {
+	public Address(int i, String string, String string2, int j, String string3) {
+		
+	}
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private long id;

@@ -16,7 +16,7 @@ import com.imaginnovate.repository.UserRepository;
 public interface DtoService {
 	
 	    User saveUser(UserDto userdto); 
-		List<User> getAllUsers();
+		List<User> getAllUsers(int i);
 		User getUserById(long id);
 		User updateUser(User user,long id);
 		void deleteUser(long id);
