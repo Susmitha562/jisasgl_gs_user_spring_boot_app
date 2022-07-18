@@ -21,6 +21,9 @@ public class UserDto {
 	private String email;
 	private List<Address> address;
 	
+	public UserDto(int i, String string, String string2, String string3, List<Address> usersAddress) {
+		// TODO Auto-generated constructor stub
+	}
 	public long getId() {
 		return id;
 	}

@@ -51,6 +51,10 @@ public class User {
 		private List<Address> address;
 
 
+		public User(int i, String string, String string2, String string3, List<Address> users1Address) {
+			// TODO Auto-generated constructor stub
+		}
+
 		public long getId() {
 			return id;
 		}
